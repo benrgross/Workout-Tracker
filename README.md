@@ -20,7 +20,7 @@ this project is deployed on heroku, but if the user wishes they can run the appl
 
 ## Usage
 
-Follow the link here:
+Follow the link here: https://workout-fun.herokuapp.com/?id=60418be71be5fa0015bbea6d
 
 ## License
 
