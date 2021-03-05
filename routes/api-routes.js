@@ -31,4 +31,13 @@ module.exports = (app) => {
       throw new Error(err);
     }
   });
+
+  app.get("/api/workouts/range", async (req, res) => {
+    try {
+      const range = await db.Workout.find();
+      res.json(range);
+    } catch {
+      throw new Error(err);
+    }
+  });
 };
