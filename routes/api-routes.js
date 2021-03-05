@@ -3,8 +3,15 @@ const db = require("../models");
 module.exports = (app) => {
   app.get("/api/workouts", async (req, res) => {
     try {
-      const workouts = await db.Workout.find();
-      res.json(workouts);
+      const workouts = await db.Workout.aggregate([
+        {
+          $addFields: {
+            totalDuration: { $sum: "$exercises.duration" },
+          },
+        },
+      ]);
+      console.log(workouts);
+      res.send(workouts);
     } catch (err) {
       throw new Error(err);
     }
@@ -34,9 +41,16 @@ module.exports = (app) => {
 
   app.get("/api/workouts/range", async (req, res) => {
     try {
-      const range = await db.Workout.find();
-      res.json(range);
-    } catch {
+      const workouts = await db.Workout.aggregate([
+        {
+          $addFields: {
+            totalDuration: { $sum: "$exercises.duration" },
+          },
+        },
+      ]);
+      console.log(workouts);
+      res.send(workouts);
+    } catch (err) {
       throw new Error(err);
     }
   });
