@@ -10,8 +10,7 @@ module.exports = (app) => {
           },
         },
       ]);
-      console.log(workouts);
-      res.send(workouts);
+      res.json(workouts);
     } catch (err) {
       throw new Error(err);
     }
@@ -47,7 +46,9 @@ module.exports = (app) => {
             totalDuration: { $sum: "$exercises.duration" },
           },
         },
-      ]);
+      ])
+        .sort({ day: -1 })
+        .limit(7);
       console.log(workouts);
       res.send(workouts);
     } catch (err) {
