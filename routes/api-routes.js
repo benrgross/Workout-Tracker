@@ -29,8 +29,10 @@ module.exports = (app) => {
     try {
       const workouts = await db.Workout.findByIdAndUpdate(
         params.id,
-        { $push: { exercises: body } },
-        { new: true, runValidators: true }
+        {
+          $push: { exercises: body },
+        },
+        { new: true }
       );
       res.json(workouts);
     } catch (err) {
